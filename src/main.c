@@ -7,13 +7,15 @@
 // Header Files
 #include "include/common.h"
 #include "include/game_board.h"
+#include "include/mine_field.h"
 
 // Source Files
 #include "game_board.c"
+#include "mine_field.c"
 
 // Updates logic
 void update(f32 delta_time) {
-
+    game_board_update(delta_time);
 }
 
 // Updates graphics
@@ -22,6 +24,7 @@ void render() {
     ClearBackground(GRAY);
 
     game_board_render();
+    mine_field_render();
 
     EndDrawing();
 }
@@ -33,6 +36,7 @@ int main() {
 
     while (!WindowShouldClose())
     {
+        update(GetFrameTime());
         render();
     }
     
