@@ -9,6 +9,4 @@ void game_board_generate();
 
 bool game_board_generated = false;
 
-tile_s grid[TILE_MULTIPLIER][TILE_MULTIPLIER];
-
 #endif

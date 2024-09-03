@@ -16,6 +16,7 @@
 // Updates logic
 void update(f32 delta_time) {
     game_board_update(delta_time);
+    mine_field_update(delta_time);
 }
 
 // Updates graphics

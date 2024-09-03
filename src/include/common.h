@@ -14,7 +14,7 @@
 
 #define TILE_SIZE 50
 #define TILE_MULTIPLIER 20
-#define BOARD_SIZE TILE_SIZE *TILE_MULTIPLIER
+#define BOARD_SIZE TILE_SIZE * TILE_MULTIPLIER
 #define TILE_OFFSET 100
 
 typedef uint8_t byte;
@@ -30,9 +30,14 @@ typedef int64_t i64;
 typedef float f32;
 typedef double f64;
 
-typedef struct tile_s {
+typedef struct tile_s
+{
     u16 ROWS;
     u16 COLS;
+    bool CONTAINS_MINE;
+    bool REVEALED;
 } tile_s;
+
+tile_s grid[TILE_MULTIPLIER][TILE_MULTIPLIER];
 
 #endif

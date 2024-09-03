@@ -2,24 +2,49 @@
 
 void mine_field_update(f32 delta_time)
 {
+    mine_field_generate();
+}
+
+void mine_field_generate()
+{
+    if (!mine_field_generated)
+    {
+        for (u16 i = 0; i < TILE_MULTIPLIER; i++)
+        {
+            for (u16 j = 0; j < TILE_MULTIPLIER; j++)
+            {
+                u16 mine_spawn_chance = GetRandomValue(0, msc_hard);
+
+                if (mine_spawn_chance == 0)
+                {
+                    grid[i][j] = (tile_s){.ROWS = i, .COLS = j, .CONTAINS_MINE = true, .REVEALED = false};
+                }
+            }
+        }
+        mine_field_generated = true;
+    }
+}
+
+void mine_draw(tile_s tile)
+{
+    DrawCircle(
+        tile.ROWS * TILE_SIZE + TILE_SIZE / 2,
+        tile.COLS * TILE_SIZE + TILE_SIZE / 2 + TILE_OFFSET,
+        MINE_SIZE,
+        tile.REVEALED ? RED : BLANK
+    );
 }
 
 void mine_field_render()
 {
-    for (u16 pos_x = 0; pos_x < BOARD_SIZE; pos_x += TILE_SIZE)
+    for (u16 i = 0; i < TILE_MULTIPLIER; i++)
     {
-        for (u16 pos_y = 0; pos_y < BOARD_SIZE; pos_y += TILE_SIZE)
+        for (u16 j = 0; j < TILE_MULTIPLIER; j++)
         {
-            u16 mine_spawn_chance = GetRandomValue(0, msc_medium);
-
-            if (mine_spawn_chance == 0)
+            if (grid[i][j].CONTAINS_MINE)
             {
-                // DrawCircle(pos_x + 5, pos_y + TILE_OFFSET + 5, 5, RED);
+                mine_draw(grid[i][j]);
             }
-            
-
-            // Rectangle game_tile = {pos_x, pos_y + TILE_OFFSET, pos_x + TILE_SIZE, pos_y + TILE_OFFSET + TILE_SIZE};
-            // DrawRectangleRec(game_tile, BLANK);
         }
     }
 }

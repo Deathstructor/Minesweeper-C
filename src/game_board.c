@@ -13,7 +13,7 @@ void game_board_generate()
         {
             for (u16 j = 0; j < TILE_MULTIPLIER; j++)
             {
-                grid[i][j] = (tile_s){.ROWS = i, .COLS = j};
+                grid[i][j] = (tile_s){.ROWS = i, .COLS = j, .CONTAINS_MINE = false, .REVEALED = false};
             }
         }
         game_board_generated = true;
