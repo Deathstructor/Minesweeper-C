@@ -8,15 +8,18 @@
 #include "include/common.h"
 #include "include/game_board.h"
 #include "include/mine_field.h"
+#include "include/tile_logic.h"
 
 // Source Files
 #include "game_board.c"
 #include "mine_field.c"
+#include "tile_logic.c"
 
 // Updates logic
 void update(f32 delta_time) {
     game_board_update(delta_time);
     mine_field_update(delta_time);
+    tile_logic_update(delta_time);
 }
 
 // Updates graphics
