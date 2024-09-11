@@ -1,13 +1,47 @@
 #include "include/tile_logic.h"
 
+u16 check_surrounding_mines(u16 x, u16 y)
+{
+    u16 surrounding_mines = 0;
+
+    for (i16 i = -1; i <= 1; i++)
+    {
+        for (i16 j = -1; j <= 1; j++)
+        {
+            if (i == 0 && j == 0)
+            {
+                continue;
+            }
+
+            u16 neighbor_x = x + i;
+            u16 neighbor_y = y + j;
+
+            if (grid[neighbor_x][neighbor_y].CONTAINS_MINE)
+            {
+                surrounding_mines++;
+            }
+        }
+    }
+
+    return surrounding_mines;
+}
+
 void tile_logic_update(f32 delta_time)
 {
+    for (u16 i = 0; i < TILE_MULTIPLIER; i++)
+    {
+        for (u16 j = 0; j < TILE_MULTIPLIER; j++)
+        {
+            grid[i][j].SURROUNDING_MINES = check_surrounding_mines(i, j);
+        }
+    }
+
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
     {
         Vector2 mouse_pos = GetMousePosition();
 
-        i16 mouse_x = mouse_pos.x / TILE_SIZE;
-        i16 mouse_y = (mouse_pos.y - TILE_OFFSET) / TILE_SIZE;
+        u16 mouse_x = mouse_pos.x / TILE_SIZE;
+        u16 mouse_y = (mouse_pos.y - TILE_OFFSET) / TILE_SIZE;
 
         grid[mouse_x][mouse_y].REVEALED = true;
     }
@@ -15,5 +49,19 @@ void tile_logic_update(f32 delta_time)
 
 void tile_logic_render()
 {
-    // TODO: Add logic to render tile data
+    for (u16 i = 0; i < TILE_MULTIPLIER; i++)
+    {
+        for (u16 j = 0; j < TILE_MULTIPLIER; j++)
+        {
+            if (grid[i][j].REVEALED && !grid[i][j].CONTAINS_MINE && grid[i][j].SURROUNDING_MINES > 0)
+            {
+                DrawText(
+                    TextFormat("%d", grid[i][j].SURROUNDING_MINES),
+                    grid[i][j].ROWS * TILE_SIZE + TILE_SIZE / 3,
+                    grid[i][j].COLS * TILE_SIZE + TILE_SIZE / 3 + TILE_OFFSET,
+                    TILE_SIZE / 2,
+                    BLACK);
+            }
+        }
+    }
 }

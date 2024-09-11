@@ -36,6 +36,7 @@ typedef struct tile_s
     u16 COLS;
     bool CONTAINS_MINE;
     bool REVEALED;
+    u16 SURROUNDING_MINES;
 } tile_s;
 
 tile_s grid[TILE_MULTIPLIER][TILE_MULTIPLIER];

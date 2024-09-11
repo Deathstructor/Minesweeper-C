@@ -29,6 +29,7 @@ void render() {
 
     game_board_render();
     mine_field_render();
+    tile_logic_render();
 
     EndDrawing();
 }

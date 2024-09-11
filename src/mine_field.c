@@ -1,10 +1,5 @@
 #include "include/mine_field.h"
 
-void mine_field_update(f32 delta_time)
-{
-    mine_field_generate();
-}
-
 void mine_field_generate()
 {
     if (!mine_field_generated)
@@ -23,6 +18,11 @@ void mine_field_generate()
         }
         mine_field_generated = true;
     }
+}
+
+void mine_field_update(f32 delta_time)
+{
+    mine_field_generate();
 }
 
 void mine_draw(tile_s tile)
