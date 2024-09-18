@@ -23,6 +23,7 @@ void game_board_generate()
 void tile_draw(tile_s tile)
 {
     Rectangle tile_rect = {tile.ROWS * TILE_SIZE, tile.COLS * TILE_SIZE + TILE_OFFSET, TILE_SIZE, TILE_SIZE};
+    DrawRectangleRec(tile_rect, tile.REVEALED ? DARKGRAY : GRAY);
     DrawRectangleLinesEx(tile_rect, 1.5, BLACK);
 }
 

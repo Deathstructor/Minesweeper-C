@@ -16,7 +16,9 @@ u16 check_surrounding_mines(u16 x, u16 y)
             u16 neighbor_x = x + i;
             u16 neighbor_y = y + j;
 
-            if (grid[neighbor_x][neighbor_y].CONTAINS_MINE)
+            if (grid[neighbor_x][neighbor_y].CONTAINS_MINE &&
+                neighbor_x >= 0 && neighbor_x < TILE_MULTIPLIER &&
+                neighbor_y >= 0 && neighbor_y < TILE_MULTIPLIER)
             {
                 surrounding_mines++;
             }
@@ -24,6 +26,32 @@ u16 check_surrounding_mines(u16 x, u16 y)
     }
 
     return surrounding_mines;
+}
+
+void tile_reveal(u16 x, u16 y)
+{
+    for (i16 i = -1; i <= 1; i++)
+    {
+        for (i16 j = -1; j <= 1; j++)
+        {
+            if (i == 0 && j == 0)
+            {
+                continue;
+            }
+
+            if (x + i < 0 || x + i >= TILE_MULTIPLIER || y + j < 0 || y + j >= TILE_MULTIPLIER)
+            {
+                continue;
+            }
+
+            grid[x + i][y + j].REVEALED = true;
+
+            if (!grid[x + i][y + j].CONTAINS_MINE && !grid[x + i][y + j].REVEALED)
+            {
+                tile_reveal(x + i, y + j);
+            }
+        }
+    }
 }
 
 void tile_logic_update(f32 delta_time)
@@ -44,6 +72,11 @@ void tile_logic_update(f32 delta_time)
         u16 mouse_y = (mouse_pos.y - TILE_OFFSET) / TILE_SIZE;
 
         grid[mouse_x][mouse_y].REVEALED = true;
+
+        if (grid[mouse_x][mouse_y].SURROUNDING_MINES == 0)
+        {
+            tile_reveal(mouse_x, mouse_y);
+        }
     }
 }
 

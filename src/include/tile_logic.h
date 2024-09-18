@@ -4,6 +4,7 @@
 #include "common.h"
 
 u16 check_surrounding_mines(u16 x, u16 y);
+void tile_reveal(u16 x, u16 y);
 void tile_logic_update(f32 delta_time);
 void tile_logic_render();
 
