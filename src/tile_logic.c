@@ -1,5 +1,10 @@
 #include "include/tile_logic.h"
 
+bool isIndexValid(i16 i, i16 j)
+{
+    return i >= 0 && i < TILE_MULTIPLIER && j >= 0 && j < TILE_MULTIPLIER;
+}
+
 u16 check_surrounding_mines(u16 x, u16 y)
 {
     u16 surrounding_mines = 0;
@@ -30,25 +35,23 @@ u16 check_surrounding_mines(u16 x, u16 y)
 
 void tile_reveal(u16 x, u16 y)
 {
-    for (i16 i = -1; i <= 1; i++)
+    grid[x][y].REVEALED = true;
+
+    if (!grid[x][y].CONTAINS_MINE && grid[x][y].SURROUNDING_MINES == 0)
     {
-        for (i16 j = -1; j <= 1; j++)
+        for (i16 i = -1; i <= 1; i++)
         {
-            if (i == 0 && j == 0)
+            for (i16 j = -1; j <= 1; j++)
             {
-                continue;
-            }
+                if ((i == 0 && j == 0) || !isIndexValid(x + i, y + j))
+                {
+                    continue;
+                }
 
-            if (x + i < 0 || x + i >= TILE_MULTIPLIER || y + j < 0 || y + j >= TILE_MULTIPLIER)
-            {
-                continue;
-            }
-
-            grid[x + i][y + j].REVEALED = true;
-
-            if (!grid[x + i][y + j].CONTAINS_MINE && !grid[x + i][y + j].REVEALED)
-            {
-                tile_reveal(x + i, y + j);
+                if (!grid[x + i][y + j].REVEALED)
+                {
+                    tile_reveal(x + i, y + j);
+                }
             }
         }
     }
