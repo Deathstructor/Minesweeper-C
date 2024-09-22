@@ -96,12 +96,7 @@ void tile_logic_update(f32 delta_time)
         u16 mouse_x = mouse_pos.x / TILE_SIZE;
         u16 mouse_y = (mouse_pos.y - TILE_OFFSET) / TILE_SIZE;
 
-        // grid[mouse_x][mouse_y].REVEALED = true;
-
-        // if (grid[mouse_x][mouse_y].SURROUNDING_MINES == 0)
-        // {
-            tile_reveal(mouse_x, mouse_y);
-        // }
+        tile_reveal(mouse_x, mouse_y);
     }
 }
 
