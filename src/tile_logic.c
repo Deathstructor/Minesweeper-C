@@ -1,5 +1,13 @@
 #include "include/tile_logic.h"
 
+void tile_place_flag(u16 x, u16 y)
+{
+    if (!grid[x][y].REVEALED)
+    {
+        grid[x][y].FLAGGED = !grid[x][y].FLAGGED;
+    }
+}
+
 bool isIndexValid(i16 i, i16 j)
 {
     return i >= 0 && i < TILE_MULTIPLIER && j >= 0 && j < TILE_MULTIPLIER;
@@ -35,6 +43,11 @@ u16 check_surrounding_mines(u16 x, u16 y)
 
 void tile_reveal(u16 x, u16 y)
 {
+    if (grid[x][y].REVEALED || grid[x][y].FLAGGED)
+    {
+        return;
+    }
+
     grid[x][y].REVEALED = true;
 
     if (!grid[x][y].CONTAINS_MINE && grid[x][y].SURROUNDING_MINES == 0)
@@ -59,6 +72,15 @@ void tile_reveal(u16 x, u16 y)
 
 void tile_logic_update(f32 delta_time)
 {
+    if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))
+    {
+        Vector2 mouse_pos = GetMousePosition();
+        u16 mouse_x = mouse_pos.x / TILE_SIZE;
+        u16 mouse_y = (mouse_pos.y - TILE_OFFSET) / TILE_SIZE;
+
+        tile_place_flag(mouse_x, mouse_y);
+    }
+
     for (u16 i = 0; i < TILE_MULTIPLIER; i++)
     {
         for (u16 j = 0; j < TILE_MULTIPLIER; j++)
@@ -74,12 +96,12 @@ void tile_logic_update(f32 delta_time)
         u16 mouse_x = mouse_pos.x / TILE_SIZE;
         u16 mouse_y = (mouse_pos.y - TILE_OFFSET) / TILE_SIZE;
 
-        grid[mouse_x][mouse_y].REVEALED = true;
+        // grid[mouse_x][mouse_y].REVEALED = true;
 
-        if (grid[mouse_x][mouse_y].SURROUNDING_MINES == 0)
-        {
+        // if (grid[mouse_x][mouse_y].SURROUNDING_MINES == 0)
+        // {
             tile_reveal(mouse_x, mouse_y);
-        }
+        // }
     }
 }
 
