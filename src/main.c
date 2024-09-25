@@ -9,11 +9,13 @@
 #include "include/game_board.h"
 #include "include/mine_field.h"
 #include "include/tile_logic.h"
+#include "include/game_over.h"
 
 // Source Files
 #include "game_board.c"
 #include "mine_field.c"
 #include "tile_logic.c"
+#include "game_over.c"
 
 // Updates logic
 void update(f32 delta_time) {
@@ -30,6 +32,7 @@ void render() {
     game_board_render();
     mine_field_render();
     tile_logic_render();
+    game_over_render();
 
     EndDrawing();
 }
