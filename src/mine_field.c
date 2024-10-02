@@ -24,27 +24,3 @@ void mine_field_update(f32 delta_time)
 {
     mine_field_generate();
 }
-
-void mine_draw(tile_s tile)
-{
-    DrawCircle(
-        tile.ROWS * TILE_SIZE + TILE_SIZE / 2,
-        tile.COLS * TILE_SIZE + TILE_SIZE / 2 + TILE_OFFSET,
-        MINE_SIZE,
-        tile.REVEALED ? RED : BLANK
-    );
-}
-
-void mine_field_render()
-{
-    for (u16 i = 0; i < TILE_MULTIPLIER; i++)
-    {
-        for (u16 j = 0; j < TILE_MULTIPLIER; j++)
-        {
-            if (grid[i][j].CONTAINS_MINE)
-            {
-                mine_draw(grid[i][j]);
-            }
-        }
-    }
-}

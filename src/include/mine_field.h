@@ -5,9 +5,8 @@
 
 #include "common.h"
 
-void mine_field_update(f32 delta_time);
-void mine_field_render();
 void mine_field_generate();
+void mine_field_update(f32 delta_time);
 
 bool mine_field_generated = false;
 

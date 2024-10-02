@@ -5,7 +5,6 @@
 
 void game_board_update(f32 delta_time);
 void game_board_generate();
-Color tile_get_color(tile_s tile);
 void tile_draw(tile_s tile);
 void game_board_render();
 

@@ -99,22 +99,3 @@ void tile_logic_update(f32 delta_time)
         tile_reveal(mouse_x, mouse_y);
     }
 }
-
-void tile_logic_render()
-{
-    for (u16 i = 0; i < TILE_MULTIPLIER; i++)
-    {
-        for (u16 j = 0; j < TILE_MULTIPLIER; j++)
-        {
-            if (grid[i][j].REVEALED && !grid[i][j].CONTAINS_MINE && grid[i][j].SURROUNDING_MINES > 0)
-            {
-                DrawText(
-                    TextFormat("%d", grid[i][j].SURROUNDING_MINES),
-                    grid[i][j].ROWS * TILE_SIZE + TILE_SIZE / 3,
-                    grid[i][j].COLS * TILE_SIZE + TILE_SIZE / 3 + TILE_OFFSET,
-                    TILE_SIZE / 2,
-                    BLACK);
-            }
-        }
-    }
-}

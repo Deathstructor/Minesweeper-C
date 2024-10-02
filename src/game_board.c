@@ -26,25 +26,59 @@ void game_board_generate()
     }
 }
 
-Color tile_get_color(tile_s tile)
+void tile_draw(tile_s tile)
 {
-    if (tile.FLAGGED)
+    if (!tile.REVEALED)
     {
-        return GREEN;
+        if (tile.FLAGGED)
+        {
+            DrawTexture(tile_flag, tile.ROWS * TILE_SIZE, tile.COLS * TILE_SIZE + TILE_OFFSET, WHITE);
+        }
+        else
+        {
+            DrawTexture(tile_tile, tile.ROWS * TILE_SIZE, tile.COLS * TILE_SIZE + TILE_OFFSET, WHITE);
+        }
     }
     else
     {
-        return tile.REVEALED ? DARKGRAY : GRAY;
+        if (tile.CONTAINS_MINE)
+        {
+            DrawTexture(tile_mine, tile.ROWS * TILE_SIZE, tile.COLS * TILE_SIZE + TILE_OFFSET, WHITE);
+        }
+        else
+        {
+            switch (tile.SURROUNDING_MINES)
+            {
+            case 0:
+                DrawTexture(tile_blank, tile.ROWS * TILE_SIZE, tile.COLS * TILE_SIZE + TILE_OFFSET, WHITE);
+                break;
+            case 1:
+                DrawTexture(tile_one, tile.ROWS * TILE_SIZE, tile.COLS * TILE_SIZE + TILE_OFFSET, WHITE);
+                break;
+            case 2:
+                DrawTexture(tile_two, tile.ROWS * TILE_SIZE, tile.COLS * TILE_SIZE + TILE_OFFSET, WHITE);
+                break;
+            case 3:
+                DrawTexture(tile_three, tile.ROWS * TILE_SIZE, tile.COLS * TILE_SIZE + TILE_OFFSET, WHITE);
+                break;
+            case 4:
+                DrawTexture(tile_four, tile.ROWS * TILE_SIZE, tile.COLS * TILE_SIZE + TILE_OFFSET, WHITE);
+                break;
+            case 5:
+                DrawTexture(tile_five, tile.ROWS * TILE_SIZE, tile.COLS * TILE_SIZE + TILE_OFFSET, WHITE);
+                break;
+            case 6:
+                DrawTexture(tile_six, tile.ROWS * TILE_SIZE, tile.COLS * TILE_SIZE + TILE_OFFSET, WHITE);
+                break;
+            case 7:
+                DrawTexture(tile_seven, tile.ROWS * TILE_SIZE, tile.COLS * TILE_SIZE + TILE_OFFSET, WHITE);
+                break;
+            case 8:
+                DrawTexture(tile_eight, tile.ROWS * TILE_SIZE, tile.COLS * TILE_SIZE + TILE_OFFSET, WHITE);
+                break;
+            }
+        }
     }
-}
-
-void tile_draw(tile_s tile)
-{
-    Color tile_color = tile_get_color(tile);
-
-    Rectangle tile_rect = {tile.ROWS * TILE_SIZE, tile.COLS * TILE_SIZE + TILE_OFFSET, TILE_SIZE, TILE_SIZE};
-    DrawRectangleRec(tile_rect, tile_color);
-    DrawRectangleLinesEx(tile_rect, 1.5, BLACK);
 }
 
 void game_board_render()

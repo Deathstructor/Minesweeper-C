@@ -42,4 +42,17 @@ typedef struct tile_s
 
 tile_s grid[TILE_MULTIPLIER][TILE_MULTIPLIER];
 
+Texture2D tile_one;
+Texture2D tile_two;
+Texture2D tile_three;
+Texture2D tile_four;
+Texture2D tile_five;
+Texture2D tile_six;
+Texture2D tile_seven;
+Texture2D tile_eight;
+Texture2D tile_blank;
+Texture2D tile_flag;
+Texture2D tile_mine;
+Texture2D tile_tile;
+
 #endif

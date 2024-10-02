@@ -2,10 +2,6 @@
 #include "include/game_board.h"
 #include "include/mine_field.h"
 
-void game_over_update(f32 delta_time)
-{
-}
-
 void game_over_render()
 {
     Vector2 mouse_pos = GetMousePosition();
