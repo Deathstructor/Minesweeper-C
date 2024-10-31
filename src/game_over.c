@@ -30,6 +30,11 @@ void game_over_render()
         }
     }
 
+    if (board_view && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+    {
+        game_over = true;
+    }
+
     if (game_over)
     {
         Rectangle restart = {400, 525, 200, 50};
@@ -60,7 +65,8 @@ void game_over_render()
 
             if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
             {
-                /* code */
+                game_over = false;
+                board_view = true;
             }
         }
         DrawRectangleRec(view_board, hover_view_board ? (Color){150, 0, 0, 255} : RED);

@@ -6,5 +6,6 @@
 void game_over_render();
 
 bool game_over = false;
+bool board_view = false;
 
 #endif
