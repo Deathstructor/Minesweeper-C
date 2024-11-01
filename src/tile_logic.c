@@ -4,6 +4,15 @@ void tile_place_flag(u16 x, u16 y)
 {
     if (!grid[x][y].REVEALED)
     {
+        if (!grid[x][y].FLAGGED)
+        {
+            flag_count++;
+        }
+        else
+        {
+            flag_count--;
+        }
+
         grid[x][y].FLAGGED = !grid[x][y].FLAGGED;
     }
 }

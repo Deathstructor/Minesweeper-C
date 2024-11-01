@@ -54,5 +54,11 @@ Texture2D tile_blank;
 Texture2D tile_flag;
 Texture2D tile_mine;
 Texture2D tile_tile;
+Texture2D info_box_texture;
+
+Font digital_font;
+
+i16 mine_count = 0;
+i16 flag_count = 0;
 
 #endif

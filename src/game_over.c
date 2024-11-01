@@ -1,6 +1,7 @@
 #include "include/game_over.h"
 #include "include/game_board.h"
 #include "include/mine_field.h"
+#include "include/info_bar.h"
 
 void game_over_render()
 {
@@ -37,6 +38,8 @@ void game_over_render()
 
     if (game_over)
     {
+        timer_stop = true;
+
         Rectangle restart = {400, 525, 200, 50};
         Rectangle view_board = {400, 600, 200, 50};
 
@@ -52,6 +55,10 @@ void game_over_render()
             {
                 game_board_generated = false;
                 mine_field_generated = false;
+                mine_count = 0;
+                flag_count = 0;
+                timer = 0;
+                timer_stop = false;
                 game_over = false;
             }
         }

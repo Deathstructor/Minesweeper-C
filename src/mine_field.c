@@ -13,6 +13,7 @@ void mine_field_generate()
                 if (mine_spawn_chance == 0)
                 {
                     grid[i][j] = (tile_s){.ROWS = i, .COLS = j, .CONTAINS_MINE = true, .REVEALED = false};
+                    mine_count++;
                 }
             }
         }
