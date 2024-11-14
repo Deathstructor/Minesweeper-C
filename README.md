@@ -5,7 +5,7 @@ The project is just for fun.
 
 ### Running the game
 
-At the moment there is no executable file to run the game, it has to be built using a script and only works on MacOS for now.
+At the moment there is no executable file to run the game, it has to be built using a script and only works with consoles supporting shell files for now.
 
 To build and run the game, simply CD to the folder where the game is located:
 ```bash
